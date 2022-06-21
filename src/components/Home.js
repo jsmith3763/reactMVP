@@ -1,9 +1,6 @@
 import CategoryList from "./CategoryList";
-import GoalsList from "./GoalsList";
 import useFetch from "./useFetch";
-import SingleCategory from "./SingleCategory";
-import { useState, useEffect } from "react";
-import NavBar from "./NavBar";
+
 
 const Home = () => {
     //custom hook we created to handle fetch requests

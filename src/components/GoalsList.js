@@ -29,7 +29,3 @@ const GoalsList = (props) => {
 }
 
 export default GoalsList;
-
-/* {props.goals.map((goal) => (
-                <SingleGoal goal={goal.goal} allGoals={props.goals} id={goal.goal_id} key={goal.goal_id} />
-            ))} */

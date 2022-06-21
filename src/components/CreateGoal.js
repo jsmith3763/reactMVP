@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+
 
 const CreateGoal = (props) => {
 
@@ -30,7 +30,7 @@ const CreateGoal = (props) => {
                 <input
                     type="text"
                     required
-                    // value={}
+                    value={goal}
                     onChange={(e) => setGoal(e.target.value)}
                 />
                 {!isPending && <button>Add Goal</button>}

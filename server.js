@@ -3,9 +3,6 @@ const express = require("express");
 const db = require("./db/conn");
 const app = express();
 const cors = require('cors');
-const { response } = require("express");
-const { json } = require("body-parser");
-
 
 const PORT = process.env.PORT || 5555;
 
