@@ -4,6 +4,7 @@ CREATE DATABASE goals_db;
 
 DROP TABLE IF EXISTS goalcategories CASCADE;
 DROP TABLE IF EXISTS goals;
+Drop Table IF EXISTS completedGoals;
 
 CREATE TABLE goalcategories (
     category_id SERIAL NOT NULL,
@@ -19,3 +20,9 @@ CREATE TABLE goals (
     PRIMARY KEY (goal_id),
     FOREIGN KEY (category_id) REFERENCES goalcategories(category_id)
 );
+
+CREATE TABLE completedGoals (
+    goal_id INTEGER,
+    goal TEXT,
+    isGoalComplete BOOLEAN
+)

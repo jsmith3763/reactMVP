@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const db = require("./db/conn");
 const app = express();
+const cors = require('cors');
 const { response } = require("express");
 const { json } = require("body-parser");
 
@@ -10,9 +11,11 @@ const PORT = process.env.PORT || 5555;
 
 app.use(express.static("public"));
 app.use(express.json());
+app.use(cors())
+
 
 app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
+    res.send('hello world')
 });
 
 //getall
@@ -21,6 +24,21 @@ app.get("/goals", async (req, res) => {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goals");
         res.json(result.rows);
+        console.log(result.rows)
+        client.release();
+    } catch (error) {
+        console.error(error);
+        res.send("Error: ", error);
+    }
+});
+
+//getall completed goals
+app.get("/completedgoals", async (req, res) => {
+    try {
+        let client = await db.connect();
+        const result = await db.query("SELECT * FROM completedGoals");
+        res.json(result.rows);
+        console.log(result.rows)
         client.release();
     } catch (error) {
         console.error(error);
@@ -34,6 +52,7 @@ app.get("/goalcategories", async (req, res) => {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goalcategories");
         res.json(result.rows);
+        console.log(result.rows)
         client.release();
     } catch (error) {
         console.error(error);
@@ -42,7 +61,7 @@ app.get("/goalcategories", async (req, res) => {
 });
 
 
-//getone
+//getall from category
 app.get("/goals/:id", async (req, res) => {
     try {
         let client = await db.connect();
@@ -120,6 +139,21 @@ app.post('/goals', async (req, res) => {
         console.error(error);
     }
 });
+
+//post - May need to change category_id from SERIAL and pass in category id from textBox?
+app.post('/completedgoals', async (req, res) => {
+    try {
+        let client = await db.connect();
+        const { goal, category_id, isgoalcomplete } = req.body;
+        const { rows } = await db.query('INSERT INTO completedGoals (goal, category_id, isgoalcomplete) VALUES($1, $2, $3) RETURNING *', [goal, category_id, isgoalcomplete]);
+        res.send({ data: (rows), message: "Goal has been completed" });
+        console.log({ rows });
+        client.release();
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 
 //post - May need to change category_id from SERIAL and pass in category id from textBox?
 app.post('/goalcategories', async (req, res) => {

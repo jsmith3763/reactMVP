@@ -1,20 +1,21 @@
-
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const SingleGoal = (props) => {
+
+const SingleCategory = (props) => {
+
     const id = props.id;
-    const [currentGoal, setGoal] = useState(props.goal);
-    let [newGoal, setNewGoal] = useState('');
+    const [currentCategory, setCurrentCategory] = useState(props.category);
+    let [updatedCategory, setUpdatedCategory] = useState('');
     const [button, setButton] = useState(true);
     const [updateText, setUpdateText] = useState(false);
     const [isPending, setIsPending] = useState(false);
 
-
     const deleteClick = () => {
-        fetch(`http://localhost:3000/goals/${id}`, {
+        fetch(`http://localhost:3000/goalcategories/${id}`, {
             method: 'DELETE'
         }).then(() => {
-            setGoal(null)
+            setCurrentCategory(null)
             setButton(false)
         }
         )
@@ -25,24 +26,24 @@ const SingleGoal = (props) => {
     }
 
     const updateGoal = (e) => {
-        setGoal(newGoal);
-        let updateObj = { goal: newGoal }
+        setCurrentCategory(updatedCategory);
+        let updateObj = { category: updatedCategory }
         e.preventDefault();
-        console.log(newGoal)
-        fetch(`http://localhost:3000/goals/${id}`, {
+        console.log(updatedCategory)
+        fetch(`http://localhost:3000/goalcategories/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updateObj)
         }).then(() => {
-            console.log('Goal updated');
+            console.log('Category updated');
         })
     }
 
-
-
     return (
-        <div className="singleGoal">
-            <h3>{currentGoal}</h3>
+        <div className="single-category">
+            <Link to={`goals/${id}`}>
+                <h2>{currentCategory}</h2>
+            </Link>
             {button && <button onClick={(updateClick)}>Update</button>}
             {button && <button onClick={(deleteClick)}>Delete</button>}
             {updateText && <form onSubmit={updateGoal}>
@@ -50,14 +51,14 @@ const SingleGoal = (props) => {
                 <input
                     type="text"
                     required
-                    value={newGoal}
-                    onChange={(e) => setNewGoal(e.target.value)}
+                    value={updatedCategory}
+                    onChange={(e) => setUpdatedCategory(e.target.value)}
                 />
                 {!isPending && <button>Update Goal</button>}
                 {isPending && <button disabled>Updating goal...</button>}
             </form>}
-        </div>
+        </div >
     );
 }
 
-export default SingleGoal;
+export default SingleCategory; 
