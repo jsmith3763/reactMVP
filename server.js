@@ -20,7 +20,7 @@ app.get("/goals", async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goals");
-        res.json(result.rows);
+        res.send(result.rows);
         console.log(result.rows)
         client.release();
     } catch (error) {
@@ -34,7 +34,7 @@ app.get("/completedgoals", async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM completedGoals");
-        res.json(result.rows);
+        res.send(result.rows);
         console.log(result.rows)
         client.release();
     } catch (error) {
@@ -48,7 +48,7 @@ app.get("/goalcategories", async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goalcategories");
-        res.json(result.rows);
+        res.send(result.rows);
         console.log(result.rows)
         client.release();
     } catch (error) {
@@ -63,7 +63,7 @@ app.get("/goals/:id", async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goals WHERE category_id = $1", [req.params.id]);
-        res.json(result.rows);
+        res.send(result.rows);
         client.release();
     } catch (error) {
         console.error(error);
@@ -76,7 +76,7 @@ app.get("/goalcategories/:id", async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goalcategories WHERE category_id = $1", [req.params.id]);
-        res.json(result.rows);
+        res.send(result.rows);
         client.release();
     } catch (error) {
         console.error(error);
@@ -172,7 +172,7 @@ app.delete('/goals/:id', async (req, res) => {
         let client = await db.connect();
         const deletedGoal = await db.query('SELECT * FROM goals WHERE goal_id = $1', [req.params.id]);
         const deleted = await db.query('DELETE FROM goals WHERE goal_id = $1', [req.params.id]);
-        res.json(deletedGoal.rows);
+        res.send(deletedGoal.rows);
         client.release();
     } catch (error) {
         console.error(error);
@@ -186,7 +186,7 @@ app.delete('/goalcategories/:id', async (req, res) => {
         const deletedCategory = await db.query('SELECT * FROM goalcategories WHERE category_id = $1', [req.params.id]);
         const deletedGoals = await db.query('DELETE FROM goals where category_id = $1', [req.params.id]);
         const deleted = await db.query('DELETE FROM goalcategories WHERE category_id = $1', [req.params.id]);
-        res.json(deletedCategory.rows);
+        res.send(deletedCategory.rows);
         client.release();
     } catch (error) {
         console.error(error);
