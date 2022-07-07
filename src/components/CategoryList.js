@@ -3,7 +3,6 @@ import SingleCategory from "./SingleCategory";
 
 const CategoryList = (props) => {
 
-
     return (
         <div className="category-list">
             {props.category.map((category) => (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const SingleCategory = (props) => {
@@ -9,7 +9,7 @@ const SingleCategory = (props) => {
     let [updatedCategory, setUpdatedCategory] = useState('');
     const [button, setButton] = useState(true);
     const [updateText, setUpdateText] = useState(false);
-    const [isPending, setIsPending] = useState(false);
+    const [isPending] = useState(false);
 
     const deleteClick = () => {
         fetch(`http://localhost:3000/goalcategories/${id}`, {

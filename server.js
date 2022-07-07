@@ -58,7 +58,7 @@ app.get("/goalcategories", async (req, res) => {
 });
 
 
-//getall from category
+//get
 app.get("/goals/:id", async (req, res) => {
     try {
         let client = await db.connect();
