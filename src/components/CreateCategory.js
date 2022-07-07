@@ -11,7 +11,7 @@ const CreateCategory = () => {
         category = { category, category_id: 1 };
         setIsPending(true);
 
-        fetch('http://localhost:3000/goalcategories', {
+        fetch('https://shielded-springs-77634.herokuapp.com/goalcategories', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(category)

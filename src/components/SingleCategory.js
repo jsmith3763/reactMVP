@@ -12,7 +12,7 @@ const SingleCategory = (props) => {
     const [isPending] = useState(false);
 
     const deleteClick = () => {
-        fetch(`http://localhost:3000/goalcategories/${id}`, {
+        fetch(`https://shielded-springs-77634.herokuapp.com/goalcategories/${id}`, {
             method: 'DELETE'
         }).then(() => {
             setCurrentCategory(null)
@@ -30,7 +30,7 @@ const SingleCategory = (props) => {
         let updateObj = { category: updatedCategory }
         e.preventDefault();
         console.log(updatedCategory)
-        fetch(`http://localhost:3000/goalcategories/${id}`, {
+        fetch(`https://shielded-springs-77634.herokuapp.com/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updateObj)

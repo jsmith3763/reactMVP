@@ -12,7 +12,7 @@ const CreateGoal = (props) => {
         goal = { goal, goal_id: 2, category_id: props.id, isGoalComplete: "false" };
         setIsPending(true);
 
-        fetch('http://localhost:3000/goals', {
+        fetch('https://shielded-springs-77634.herokuapp.com/goals', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(goal)

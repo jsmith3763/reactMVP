@@ -11,7 +11,7 @@ const SingleGoal = (props) => {
 
 
     const deleteClick = () => {
-        fetch(`http://localhost:3000/goals/${id}`, {
+        fetch(`https://shielded-springs-77634.herokuapp.com/goals/${id}`, {
             method: 'DELETE'
         }).then(() => {
             setGoal(null)
@@ -29,7 +29,7 @@ const SingleGoal = (props) => {
         let updateObj = { goal: newGoal }
         e.preventDefault();
         console.log(newGoal)
-        fetch(`http://localhost:3000/goals/${id}`, {
+        fetch(`https://shielded-springs-77634.herokuapp.com/goals/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updateObj)

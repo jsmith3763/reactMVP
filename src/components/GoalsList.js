@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 //may want to pass props in?
 const GoalsList = (props) => {
     const { id } = useParams();
-    const { data: category, error, isPending } = useFetch(`http://localhost:3000/goalcategories/${id}`);
-    const { data: goals } = useFetch(`http://localhost:3000/goals/${id}`);
+    const { data: category, error, isPending } = useFetch(`https://shielded-springs-77634.herokuapp.com/goalcategories/${id}`);
+    const { data: goals } = useFetch(`https://shielded-springs-77634.herokuapp.com/goals/${id}`);
     console.log(category)
 
 
