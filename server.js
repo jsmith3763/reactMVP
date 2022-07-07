@@ -16,7 +16,7 @@ app.get("/api", (req, res) => {
 });
 
 //getall
-app.get("/goals", async (req, res) => {
+app.get('/api/goals', async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goals");
@@ -30,7 +30,7 @@ app.get("/goals", async (req, res) => {
 });
 
 //getall completed goals
-app.get("/completedgoals", async (req, res) => {
+app.get('/api/completedgoals', async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM completedGoals");
@@ -44,7 +44,7 @@ app.get("/completedgoals", async (req, res) => {
 });
 
 //getall
-app.get("/goalcategories", async (req, res) => {
+app.get('/api/goalcategories', async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goalcategories");
@@ -59,7 +59,7 @@ app.get("/goalcategories", async (req, res) => {
 
 
 //get
-app.get("/goals/:id", async (req, res) => {
+app.get('/api/goals/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goals WHERE category_id = $1", [req.params.id]);
@@ -72,7 +72,7 @@ app.get("/goals/:id", async (req, res) => {
 });
 
 //getone
-app.get("/goalcategories/:id", async (req, res) => {
+app.get('/api/goalcategories/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const result = await db.query("SELECT * FROM goalcategories WHERE category_id = $1", [req.params.id]);
@@ -86,7 +86,7 @@ app.get("/goalcategories/:id", async (req, res) => {
 
 
 //update
-app.patch('/goals/:id', async (req, res) => {
+app.patch('/api/goals/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const { goal, isGoalComplete } = req.body;
@@ -105,7 +105,7 @@ app.patch('/goals/:id', async (req, res) => {
 })
 
 //update
-app.patch('/goalcategories/:id', async (req, res) => {
+app.patch('/api/goalcategories/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const { category } = req.body;
@@ -124,7 +124,7 @@ app.patch('/goalcategories/:id', async (req, res) => {
 })
 
 //post - May need to change category_id from SERIAL and pass in category id from textBox?
-app.post('/goals', async (req, res) => {
+app.post('/api/goals', async (req, res) => {
     try {
         let client = await db.connect();
         const { goal, category_id, isgoalcomplete } = req.body;
@@ -138,7 +138,7 @@ app.post('/goals', async (req, res) => {
 });
 
 //post - May need to change category_id from SERIAL and pass in category id from textBox?
-app.post('/completedgoals', async (req, res) => {
+app.post('/api/completedgoals', async (req, res) => {
     try {
         let client = await db.connect();
         const { goal, category_id, isgoalcomplete } = req.body;
@@ -153,7 +153,7 @@ app.post('/completedgoals', async (req, res) => {
 
 
 //post - May need to change category_id from SERIAL and pass in category id from textBox?
-app.post('/goalcategories', async (req, res) => {
+app.post('/api/goalcategories', async (req, res) => {
     try {
         let client = await db.connect();
         const { category } = req.body;
@@ -167,7 +167,7 @@ app.post('/goalcategories', async (req, res) => {
 });
 
 //delete
-app.delete('/goals/:id', async (req, res) => {
+app.delete('/api/goals/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const deletedGoal = await db.query('SELECT * FROM goals WHERE goal_id = $1', [req.params.id]);
@@ -180,7 +180,7 @@ app.delete('/goals/:id', async (req, res) => {
 })
 
 //delete
-app.delete('/goalcategories/:id', async (req, res) => {
+app.delete('/api/goalcategories/:id', async (req, res) => {
     try {
         let client = await db.connect();
         const deletedCategory = await db.query('SELECT * FROM goalcategories WHERE category_id = $1', [req.params.id]);

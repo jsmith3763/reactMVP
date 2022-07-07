@@ -4,7 +4,7 @@ import useFetch from "./useFetch";
 
 const Home = () => {
     //custom hook we created to handle fetch requests
-    const { data: category, isPending, error } = useFetch('https://shielded-springs-77634.herokuapp.com/goalcategories');
+    const { data: category, isPending, error } = useFetch('https://shielded-springs-77634.herokuapp.com/api/goalcategories');
 
 
 
