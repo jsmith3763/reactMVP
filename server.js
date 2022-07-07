@@ -29,19 +29,6 @@ app.get('/api/goals', async (req, res) => {
     }
 });
 
-//getall completed goals
-app.get('/api/completedgoals', async (req, res) => {
-    try {
-        let client = await db.connect();
-        const result = await db.query("SELECT * FROM completedGoals");
-        res.send(result.rows);
-        console.log(result.rows)
-        client.release();
-    } catch (error) {
-        console.error(error);
-        res.send("Error: ", error);
-    }
-});
 
 //getall
 app.get('/api/goalcategories', async (req, res) => {

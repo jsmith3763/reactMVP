@@ -1,11 +1,35 @@
+import { useState, useEffect } from "react";
 import CategoryList from "./CategoryList";
 import useFetch from "./useFetch";
 
 
-const Home = () => {
-    //custom hook we created to handle fetch requests
-    const { data: category, isPending, error } = useFetch('https://shielded-springs-77634.herokuapp.com/api/goalcategories');
 
+const Home = () => {
+
+
+    const [categories, setCategories] = useState(null);
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    const fetchCategories = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch('https://shielded-springs-77634.herokuapp.com/api/goalcategories');
+            if (!response.ok) {
+                throw new Error(
+                    `This is an HTTP error: The status is ${response.status}`
+                );
+            }
+            let actualData = await response.json();
+            setCategories(actualData);
+            setError(null);
+        } catch (error) {
+            setError(error.message);
+            setAnswer(null);
+        }
+    }
 
 
     return (
@@ -15,7 +39,7 @@ const Home = () => {
             <h3>Click on category to see category goals</h3>
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
-            {category && <CategoryList category={category} />}
+            {category && <CategoryList category={categories} />}
         </div>
     );
 }
