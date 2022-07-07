@@ -14,7 +14,6 @@ const Home = () => {
     }, []);
 
     const fetchCategories = async () => {
-        setLoading(true);
         try {
             const response = await fetch('https://shielded-springs-77634.herokuapp.com/api/goalcategories');
             if (!response.ok) {
@@ -24,10 +23,8 @@ const Home = () => {
             }
             let actualData = await response.json();
             setCategories(actualData);
-            setError(null);
         } catch (error) {
-            setError(error.message);
-            setAnswer(null);
+            console.log(error);
         }
     }
 
