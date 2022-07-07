@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import CategoryList from "./CategoryList";
-import useFetch from "./useFetch";
-
-
 
 const Home = () => {
 
@@ -34,9 +31,9 @@ const Home = () => {
             {/* evaluates left side and if it is falsy ignores the right side */}
             <h1>All Categories</h1>
             <h3>Click on category to see category goals</h3>
-            {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>}
-            {category && <CategoryList category={categories} />}
+            {/* {error && <div>{error}</div>}
+            {isPending && <div>Loading...</div>} */}
+            {categories && <CategoryList category={categories} />}
         </div>
     );
 }
