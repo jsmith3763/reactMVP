@@ -2,13 +2,20 @@ require("dotenv").config();
 const express = require("express");
 const db = require("./db/conn");
 const app = express();
+const path = require('path');
 const cors = require('cors');
+const publicPath = path.join(__dirname, "..", 'public');
 
 const PORT = process.env.PORT || 5555;
 
+app.use(express.static(publicPath));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cors())
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+})
 
 
 app.get("/api", (req, res) => {
